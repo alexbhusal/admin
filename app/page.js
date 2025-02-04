@@ -23,14 +23,14 @@ const Home = () => {
 
 };
 
-// function MyApp({ Component, pageProps }) {
-//   const user = useAuth();
+function MyApp({ Components, pageProps }) {
+  const user = useAuth();
 
-//   if (!user) {
-//     return null; // Prevent rendering the page until user is authenticated
-//   }
+  if (!user) {
+    return null; // Prevent rendering the page until user is authenticated
+  }
 
-//   return <Component {...pageProps} />;
-// }
+  return <Components {...pageProps} />;
+}
 
 export default Home;

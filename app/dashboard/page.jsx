@@ -5,7 +5,7 @@ import {
   isSignInWithEmailLink,
   onAuthStateChanged,
   signInWithEmailLink,
-  signOut,
+  // signOut,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import Loading from "@/Components/Loading";
@@ -15,17 +15,17 @@ import { toast, ToastContainer } from "react-toastify";
 const Page = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  const handleLogOut = async () => {
-    try {
-      await signOut(auth);
-      toast.warning("You are logged out");
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const handleLogOut = async () => {
+  //   try {
+  //     await signOut(auth);
+  //     toast.warning("You are logged out");
+  //     setTimeout(() => {
+  //       router.push("/login");
+  //     }, 2000);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   // useEffect(() => {
   //   const email = window.localStorage.getItem('emailForSignIn');
@@ -85,9 +85,12 @@ const Page = () => {
     <div>
       <ToastContainer />
       {user ? (
-        <div className="absolute right-10 top-10">
-          <button onClick={handleLogOut} className="bg-blue-500 text-white p-3 rounded-full font-semibold">Sign Out</button>
+        <>
+        <div  >
+          <h1 className="text-center text-4xl font-serif italic">Admin Dashboard</h1>
         </div>
+      
+        </>
       ) : (
         <Loading />
       )}
