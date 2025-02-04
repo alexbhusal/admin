@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, firestore, collection } from "../../../util/fire";
 import Loadusers from "@/Components/LoadUsers";
-import * as XLSX from "xlsx"; // Import XLSX library
+import * as XLSX from "xlsx"; 
+
 
 const Page = () => {
   const [users, setUsers] = useState([]);
