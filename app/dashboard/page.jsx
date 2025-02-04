@@ -85,8 +85,8 @@ const Page = () => {
     <div>
       <ToastContainer />
       {user ? (
-        <div>
-          <button onClick={handleLogOut}>Sign Out</button>
+        <div className="absolute right-10 top-10">
+          <button onClick={handleLogOut} className="bg-blue-500 text-white p-3 rounded-full font-semibold">Sign Out</button>
         </div>
       ) : (
         <Loading />

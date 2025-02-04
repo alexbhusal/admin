@@ -5,11 +5,20 @@ import { auth } from "../../util/firebase";
 import {  sendSignInLinkToEmail } from "firebase/auth";
 import EmailImg from "@/Components/EmailImg";
 import { ToastContainer ,toast } from "react-toastify";
+import Load from "@/Components/Load";
+
 
 const page = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [loading,setLoading]=useState(true);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoading(false);
+    },2000)
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +44,8 @@ const page = () => {
   };
   return (
     <>
+    {loading? <Load/>:<>
+      <>
     <ToastContainer/>
       <h1 className="text-center text-5xl m-10 font-bold">Admin Login</h1>
       <div className="flex">
@@ -72,6 +83,8 @@ const page = () => {
           </div>
         </div>
       </div>
+    </>
+    </>}
     </>
   );
 };
