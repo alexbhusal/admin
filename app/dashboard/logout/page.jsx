@@ -1,6 +1,6 @@
 "use client";
 import Logout from '@/Components/Logout'
-import { auth } from '@/util/firebase';
+import { auth } from '@/util/fire';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import React from 'react'
