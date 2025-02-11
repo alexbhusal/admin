@@ -1,7 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { auth } from "../../util/firebase";
+// import { auth } from "../../util/firebase";
+import { auth } from "../../util/fire";
+
 import {  sendSignInLinkToEmail } from "firebase/auth";
 import EmailImg from "@/Components/EmailImg";
 import { ToastContainer ,toast } from "react-toastify";
@@ -30,7 +32,7 @@ const page = () => {
 
     try {
       await sendSignInLinkToEmail(auth, email, {
-        url: "http://localhost:3000/dashboard",
+        url: "http://localhost:4000/dashboard",
         handleCodeInApp: true,
       });
       window.localStorage.setItem('emailForSignIn', email);

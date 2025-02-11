@@ -4,7 +4,8 @@ import { getAuth } from "firebase/auth";  // Import the getAuth function from Fi
 import { getFirestore,collection, addDoc, getDocs } from "firebase/firestore";  // Import Firestore
 
 // Your web app's Firebase configuration
-const firebaseConf = {
+
+const firebaseConfig = {
   apiKey: "AIzaSyCpZsqHMDY23TaYiavcaR6GU-VF6fRG058",
   authDomain: "nepathya-attendance.firebaseapp.com",
   projectId: "nepathya-attendance",
@@ -15,10 +16,10 @@ const firebaseConf = {
 };
 
 // Initialize Firebase
-const apps = initializeApp(firebaseConf);
+const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and Firestore, then export them
-const auth = getAuth(apps);  // This initializes the auth service
-const firestore = getFirestore(apps);  // This initializes Firestore
+const auth = getAuth(app);  // This initializes the auth service
+const firestore = getFirestore(app);  // This initializes Firestore
 
 export { auth, firestore,collection, addDoc, getDocs };  // Exporting auth and firestore to use in other files
