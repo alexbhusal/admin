@@ -20,8 +20,8 @@ const DashboardLayout = ({ children }) => {
             </Link>
           </li> */}
           <li>
-            <Link href="/dashboard/test" className='flex text-2xl font-semibold '>
-              <span className="block p-2 hover:text-red-500 rounded cursor-pointer " >Test</span>
+            <Link href="#" className='flex text-2xl font-semibold '>
+              <span className="block p-2 hover:text-red-500 rounded cursor-pointer " >Link3</span>
             </Link>
           </li>
           <li>
