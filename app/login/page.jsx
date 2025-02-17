@@ -28,7 +28,7 @@ const page = () => {
     if (!email) {
       setError("Please enter your email address.");
       return;
-    }else if(email!="bhvnbhsl@gmail.com"){
+    }else if(email!="bhvnbhsl@gmail.com"){ //admin mail & no need of password for admin
       toast.error("You are not authorized to login");
       return;
     }
