@@ -28,6 +28,9 @@ const page = () => {
     if (!email) {
       setError("Please enter your email address.");
       return;
+    }else if(email!="bhvnbhsl@gmail.com"){
+      toast.error("You are not authorized to login");
+      return;
     }
 
     try {
