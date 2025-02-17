@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Admin-FBAMS",
+  title: "Admin-FaceTrack",
   description: "Admin Console for FBAMS",
 };
 
