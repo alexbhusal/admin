@@ -20,7 +20,8 @@ const DownloadButton = ({ users }) => {
   return (
     <button
       onClick={exportToExcel}
-      className="bg-black text-white py-2 px-4 rounded mb-5"
+      className="bg-black text-w
+      hite py-2 px-4 rounded mb-5"
     >
       Download Excel
     </button>
