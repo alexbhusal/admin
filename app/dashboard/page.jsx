@@ -16,34 +16,6 @@ import { toast, ToastContainer } from "react-toastify";
 const Page = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  // const handleLogOut = async () => {
-  //   try {
-  //     await signOut(auth);
-  //     toast.warning("You are logged out");
-  //     setTimeout(() => {
-  //       router.push("/login");
-  //     }, 2000);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const email = window.localStorage.getItem('emailForSignIn');
-  //   if (email) {
-  //     const url = window.location.href;
-  //     signInWithEmailLink(auth,email, url)
-  //       .then((result) => {
-  //         window.localStorage.removeItem('emailForSignIn');
-  //         setUser(result.user);
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error signing in with email link:', error);
-  //         router.push('/login');
-  //       });
-  //   }
-  // }, [router]);
-
   useEffect(() => {
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email =

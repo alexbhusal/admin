@@ -14,14 +14,9 @@ const DashboardLayout = ({ children }) => {
               <span className="block p-2 hover:text-red-500 rounded cursor-pointer " >Users</span>
             </Link>
           </li>
-          {/* <li>
-            <Link href="#" className='flex text-2xl font-semibold'>
-              <span className="block p-2 hover:text-red-500 rounded cursor-pointer " >Dashboard</span>
-            </Link>
-          </li> */}
           <li>
-            <Link href="#" className='flex text-2xl font-semibold '>
-              <span className="block p-2 hover:text-red-500 rounded cursor-pointer " >Link3</span>
+            <Link href="/dashboard/attendance" className='flex text-2xl font-semibold '>
+              <span className="block p-2 hover:text-red-500 rounded cursor-pointer " > Record</span>
             </Link>
           </li>
           <li>

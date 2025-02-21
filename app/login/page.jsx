@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-// import { auth } from "../../util/firebase";
 import { auth } from "../../util/fire";
 
 import {  sendSignInLinkToEmail } from "firebase/auth";
