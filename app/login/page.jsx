@@ -34,8 +34,8 @@ const page = () => {
 
     try {
       await sendSignInLinkToEmail(auth, email, {
-        // url: "http://localhost:4000/dashboard",
-         url: "https://admin.nepathya.tech/dashboard",
+        url: "http://localhost:4000/dashboard",
+        //  url: "https://admin.nepathya.tech/dashboard",
         handleCodeInApp: true,
       });
       window.localStorage.setItem('emailForSignIn', email);
