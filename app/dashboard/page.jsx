@@ -9,7 +9,7 @@ import {
   // signOut,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import Loading from "@/Components/Loading";
+import Loading from "../../Components/Loading";
 import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 

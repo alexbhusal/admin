@@ -4,9 +4,9 @@ import { useState } from "react";
 import { auth } from "../../util/fire";
 
 import {  sendSignInLinkToEmail } from "firebase/auth";
-import EmailImg from "@/Components/EmailImg";
+import EmailImg from "../../Components/EmailImg";
 import { ToastContainer ,toast } from "react-toastify";
-import Load from "@/Components/Load";
+import Load from "../../Components/Load";
 
 
 const page = () => {

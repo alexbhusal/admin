@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getDocs, firestore, collection } from "../../../util/fire";
-import Loadusers from "@/Components/LoadUsers";
+import Loadusers from "../../../Components/LoadUsers";
 import * as XLSX from "xlsx"; 
+
 
 
 const Page = () => {
