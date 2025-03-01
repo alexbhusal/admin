@@ -52,14 +52,14 @@ const page = () => {
     {loading? <Load/>:<>
       <>
     <ToastContainer/>
-      <h1 className="text-center text-5xl m-10 font-bold">Admin Login</h1>
-      <div className="flex">
-        <div className=" w-4/5 h-full">
+      <h1 className="text-3xl text-center md:text-5xl m-10 font-bold">Admin Login</h1>
+      <div className="flex flex-col md:flex-row">
+        <div className="h-full w-full md:w-4/5 ">
           <EmailImg />
         </div>
         <div className="border-l-4 border-black"></div>
-        <div className="w-2/5">
-          <div className="m-20">
+        <div className="w-full md:w-2/5">
+          <div className="flex justify-center items-center m-5 md:mt-20">
             <form onSubmit={handleSubmit}>
               <div>
                 <input

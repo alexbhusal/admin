@@ -53,31 +53,31 @@ const Page = () => {
       ) : (
         <>
           <div className="">
-            <h1 className="text-center text-4xl italic font-serif">User Record</h1>
+            <h1 className="text-2xl text-center md:text-4xl italic font-serif">User Record</h1>
           </div>
 
           <div className="mt-2">
             <div className="flex justify-end">
             <button
               onClick={exportToExcel}
-              className="bg-black text-white py-2 px-4 rounded mb-5"
+              className="bg-black text-white  py-1 md:py-2 px-1 md:px-4 rounded mb-5"
             >
               Download Excel
             </button>
             </div>
-            <div className="flex mb-2 font-semibold text-xl justify-start">
+            <div className="text-lg mb-2 font-semibold md:text-xl justify-start">
               Total Users: {users.length}
             </div>
-            <table className="min-w-full border-collapse">
+            <table className=" min-w-full border-collapse">
               <thead>
-                <tr className="text-2xl">
-                  <th className="border px-4 py-2">S No.</th>
-                  <th className="border px-4 py-2">Name</th>
-                  <th className="border px-4 py-2">Email</th>
-                  <th className="border px-4 py-2">Phone</th>
-                  <th className="border px-4 py-2">Batch</th>
-                  <th className="border px-4 py-2">Faculty</th>
-                  <th className="border px-4 py-2">Profile</th>
+                <tr className="text-xs md:text-2xl">
+                  <th className="border px-1 md:px-4 py-1 md:py-2">S No.</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Name</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Email</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Phone</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Batch</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Faculty</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Profile</th>
                 </tr>
               </thead>
               <tbody>
@@ -86,15 +86,15 @@ const Page = () => {
                   .map((user, index) => (
                     <tr
                       key={user.id}
-                      className="text-center text-xl font-mono italic"
+                      className="text-center text-xs md:text-xl font-mono italic"
                     >
-                      <td className="border px-4 py-2">{index + 1}</td>
-                      <td className="border px-4 py-2">{user.fullName}</td>
-                      <td className="border px-4 py-2">{user.email}</td>
-                      <td className="border px-4 py-2">{user.mobileNumber}</td>
-                      <td className="border px-4 py-2">{user.batch}</td>
-                      <td className="border px-4 py-2">{user.faculty}</td>
-                      <td className="border px-4 py-2 w-32 ">
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{index + 1}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{user.fullName}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{user.email}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{user.mobileNumber}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{user.batch}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2">{user.faculty}</td>
+                      <td className="border px-1 md:px-4 py-1 md:py-2 w-32 ">
                         <img
                           src={
                             user.imgurl
@@ -109,14 +109,14 @@ const Page = () => {
                   ))}
               </tbody>
               <tfoot>
-                <tr className="text-xl">
-                  <th className="border px-4 py-2">S No.</th>
-                  <th className="border px-4 py-2">Name</th>
-                  <th className="border px-4 py-2">Email</th>
-                  <th className="border px-4 py-2">Phone</th>
-                  <th className="border px-4 py-2">Batch</th>
-                  <th className="border px-4 py-2">Faculty</th>
-                  <th className="border px-4 py-2">Profile</th>
+                <tr className="text-xs md:text-xl">
+                  <th className="border px-1 md:px-4 py-1 md:py-2">S No.</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Name</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Email</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Phone</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Batch</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Faculty</th>
+                  <th className="border px-1 md:px-4 py-1 md:py-2">Profile</th>
                 </tr>
               </tfoot>
             </table>

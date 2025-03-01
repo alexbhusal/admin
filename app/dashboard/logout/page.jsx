@@ -22,12 +22,12 @@ const page = () => {
   return (
     <>
     <ToastContainer/>
-    <div className="w-full ">
+    <div className="w-full h-auto ">
         <Logout/>
     </div>
     
-    <div className="flex justify-center ">
-        <button className='text-4xl text-center bg-cyan-500 p-3 text-white rounded-3xl' onClick={handleLogOut}>Logout</button>
+    <div className="flex flex-col md:flex-row justify-center ">
+        <button className='text-2xl md:text-4xl text-center bg-cyan-500 p-3 text-white rounded-3xl' onClick={handleLogOut}>Logout</button>
     </div>
     </>
   )

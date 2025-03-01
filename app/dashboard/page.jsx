@@ -51,7 +51,7 @@ const Page = () => {
       setUser(user);
       toast(`Welcome ${user.email}`);
     });
-    return ()=>unsubscribe();
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -59,13 +59,17 @@ const Page = () => {
       <ToastContainer />
       {user ? (
         <>
-        <div  >
-          <h1 className="text-center text-4xl font-serif italic">Admin Dashboard</h1>
-        </div>
-      
+          <div>
+            <h1 className="text-center text-4xl font-serif italic">
+              Admin Dashboard
+            </h1>
+          </div>
         </>
       ) : (
+        <div className="flex justify-center items-center h-screen w-full ">
         <Loading />
+      </div>
+      
       )}
     </div>
   );
