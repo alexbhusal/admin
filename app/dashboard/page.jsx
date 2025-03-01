@@ -66,9 +66,7 @@ const Page = () => {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center h-screen w-full ">
         <Loading />
-      </div>
       
       )}
     </div>

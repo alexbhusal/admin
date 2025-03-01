@@ -49,7 +49,11 @@ const page = () => {
   };
   return (
     <>
-    {loading? <Load/>:<>
+    {loading? 
+    <div className="flex justify-center items-center h-screen">
+    <Load/>
+    </div>
+    :<>
       <>
     <ToastContainer/>
       <h1 className="text-3xl text-center md:text-5xl m-10 font-bold">Admin Login</h1>
