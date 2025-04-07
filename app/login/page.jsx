@@ -27,15 +27,15 @@ const page = () => {
     if (!email) {
       setError("Please enter your email address.");
       return;
-    }else if(email!="bhvnbhsl@gmail.com"){ //admin mail & no need of password for admin
+    }else if(email!=`${process.env.NEXT_PUBLIC_ADMIN_MAIL}`){ //admin mail & no need of password for admin
       toast.error("You are not authorized to login");
       return;
     }
 
     try {
       await sendSignInLinkToEmail(auth, email, {
-        // url: "http://localhost:4000/dashboard",
-         url: "https://admin.nepathya.tech/dashboard",
+        url: "http://localhost:4000/dashboard",
+        //  url: "https://admin.nepathya.tech/dashboard",
         handleCodeInApp: true,
       });
       window.localStorage.setItem('emailForSignIn', email);
