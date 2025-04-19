@@ -1,51 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { auth } from "../../util/fire";
-import {
-  isSignInWithEmailLink,
-  onAuthStateChanged,
-  signInWithEmailLink,
-} from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
 import Loading from "../../Components/Loading";
 import { toast, ToastContainer } from "react-toastify";
 
 const Page = () => {
   const [user, setUser] = useState(null);
-  const router = useRouter();
-  useEffect(() => {
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-        const token =  "AlexBhusal";
-        Cookies.set("token", token, { path: "/", expires: 30 });
-        
-      let email =
-        window.localStorage.getItem("emailForSignIn") ||
-        window.localStorage.getItem("email");
-
-      if (!email) {
-        email = window.prompt("Please provide your email");
-        if (email) {
-          window.localStorage.setItem("emailForSignIn", email);
-        } else {
-          toast.error("No email provided");
-          return;
-        }
-      }
-
-      // Continue with the sign-in process
-      const url = window.location.href;
-      signInWithEmailLink(auth, email, url)
-        .then((result) => {
-          window.localStorage.removeItem("emailForSignIn");
-          setUser(result.user);
-        })
-        .catch((error) => {
-          console.error("Error signing in with email link:", error);
-          router.push("/login");
-        });
-    }
-  }, [router]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
