@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { toast, ToastContainer } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const page = () => {
     const router = useRouter();
@@ -12,6 +13,7 @@ const page = () => {
         try {
           await signOut(auth);
           toast.warning("You are logged out");
+          Cookies.remove("token");
           setTimeout(() => {
             router.push("/login");
           }, 2000);

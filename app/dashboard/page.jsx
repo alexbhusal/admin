@@ -1,12 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-// import { auth } from "../../util/firebase";
+import Cookies from "js-cookie";
 import { auth } from "../../util/fire";
 import {
   isSignInWithEmailLink,
   onAuthStateChanged,
   signInWithEmailLink,
-  // signOut,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import Loading from "../../Components/Loading";
@@ -17,6 +16,9 @@ const Page = () => {
   const router = useRouter();
   useEffect(() => {
     if (isSignInWithEmailLink(auth, window.location.href)) {
+        const token =  "AlexBhusal";
+        Cookies.set("token", token, { path: "/", expires: 30 });
+        
       let email =
         window.localStorage.getItem("emailForSignIn") ||
         window.localStorage.getItem("email");
@@ -48,7 +50,7 @@ const Page = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
-      toast(`Welcome ${user.email}`);
+      toast(`Welcome ${user?.email}`);
     });
     return () => unsubscribe();
   }, []);
