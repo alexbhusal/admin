@@ -128,7 +128,7 @@ const Page = () => {
               <td className="border px-2 py-1">{user.batch || "----"}</td>
               <td className="border px-2 py-1">{user.faculty || "----"}</td>
               <td className="border px-2 py-1 w-32">
-                <img src={user.imgurl || defaultImg} alt="" className="rounded-xl" />
+                <img src={user.imgurl || defaultImg} alt="" className="w-24 h-24 object-cover rounded-xl" />
               </td>
             </tr>
           ))}
