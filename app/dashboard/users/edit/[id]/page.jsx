@@ -1,0 +1,94 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { firestore } from "../../../../../util/fire";
+import Swal from "sweetalert2";
+import Loading from "@/Components/Loading";
+
+const EditUserPage = () => {
+  const { id } = useParams();
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userRef = doc(firestore, "users", id);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) setUser({ id, ...userSnap.data() });
+        else Swal.fire("Not Found", "User not found", "error");
+      } catch {
+        console.log("Error", "Failed to fetch user data", "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, [id]);
+
+  const handleChange = (e) => setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleUpdate = async () => {
+    setUpdating(true);
+    try {
+      await updateDoc(doc(firestore, "users", id), user);
+      Swal.fire("Success", `${user.fullName} updated!`, "success");
+      router.push("/dashboard/users");
+    } catch {
+      console.log("Error", "Failed to update user", "error");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    const result = await Swal.fire({
+      title: `Delete ${user.fullName}?`,
+      text: "This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+    });
+    if (result.isConfirmed) {
+      try {
+        await deleteDoc(doc(firestore, "users", id));
+        Swal.fire("Deleted!", `${user.fullName} has been deleted.`, "success");
+        router.push("/dashboard/users");
+      } catch {
+        Swal.fire("Error", "Failed to delete user", "error");
+      }
+    }
+  };
+
+  if (loading) return <div className="flex justify-center items-center h-screen"><Loading /></div>;
+  if (!user) return <div className="flex justify-center items-center h-screen">User Not Found</div>;
+
+  return (
+    <div className="p-4 max-w-2xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Edit User</h1>
+      {["fullName", "email", "mobileNumber", "batch", "faculty"].map((field) => (
+        <div key={field} className="mb-4">
+          <label className="block mb-1">{field}</label>
+          <input
+            type="text"
+            name={field}
+            value={user[field] || ""}
+            placeholder={`${field} not available`}
+            onChange={handleChange}
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
+      ))}
+      <div className="flex gap-4 mt-6">
+        <button onClick={handleUpdate} disabled={updating} className="bg-black text-white px-6 py-2 rounded">
+          {updating ? "Updating..." : "Update"}
+        </button>
+        <button onClick={handleDelete} className="bg-red-600 text-white px-6 py-2 rounded">Delete</button>
+      </div>
+    </div>
+  );
+};
+
+export default EditUserPage;

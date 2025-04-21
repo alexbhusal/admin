@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getDocs, firestore, collection } from "../../../util/fire";
 import Loadusers from "../../../Components/LoadUsers";
 import * as XLSX from "xlsx";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [users, setUsers] = useState([]);
@@ -12,15 +13,20 @@ const Page = () => {
   const [selectedFaculty, setSelectedFaculty] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
+  const router = useRouter();
 
-  const defaultImg = "https://res.cloudinary.com/dxdbrqanq/image/upload/v1745248025/cmwzp0fvevkvc4ypxmpc.png";
+  const defaultImg =
+    "https://res.cloudinary.com/dxdbrqanq/image/upload/v1745248025/cmwzp0fvevkvc4ypxmpc.png";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userDB = collection(firestore, "users");
         const sData = await getDocs(userDB);
-        const userData = sData.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const userData = sData.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
         setUsers(userData);
       } catch (e) {
         console.error("Error fetching data:", e);
@@ -47,10 +53,11 @@ const Page = () => {
     XLSX.writeFile(workbook, "User_Data.xlsx");
   };
 
-  const filteredUsers = users.filter((user) =>
-    user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (!selectedBatch || user.batch === selectedBatch) &&
-    (!selectedFaculty || user.faculty === selectedFaculty)
+  const filteredUsers = users.filter(
+    (user) =>
+      user.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (!selectedBatch || user.batch === selectedBatch) &&
+      (!selectedFaculty || user.faculty === selectedFaculty)
   );
 
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
@@ -59,13 +66,17 @@ const Page = () => {
     .slice((currentPage - 1) * usersPerPage, currentPage * usersPerPage);
 
   const uniqueValues = (key) =>
-    [...new Set(users.map((u) => u[key]).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    [...new Set(users.map((u) => u[key]).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b)
+    );
 
   return loading ? (
     <Loadusers />
   ) : (
     <div className="px-4">
-      <h1 className="text-center text-2xl md:text-4xl italic font-serif mb-4">User Record</h1>
+      <h1 className="text-center text-2xl md:text-4xl italic font-serif mb-4">
+        User Record
+      </h1>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-2 mb-4">
@@ -73,34 +84,50 @@ const Page = () => {
           type="text"
           placeholder="Search by name"
           value={searchTerm}
-          onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
           className="border px-2 py-1 rounded w-full md:w-1/3"
         />
         <select
           value={selectedBatch}
-          onChange={(e) => { setSelectedBatch(e.target.value); setCurrentPage(1); }}
+          onChange={(e) => {
+            setSelectedBatch(e.target.value);
+            setCurrentPage(1);
+          }}
           className="border px-2 py-1 rounded w-full md:w-1/4"
         >
           <option value="">All Batches</option>
           {uniqueValues("batch").map((batch) => (
-            <option key={batch} value={batch}>{batch}</option>
+            <option key={batch} value={batch}>
+              {batch}
+            </option>
           ))}
         </select>
         <select
           value={selectedFaculty}
-          onChange={(e) => { setSelectedFaculty(e.target.value); setCurrentPage(1); }}
+          onChange={(e) => {
+            setSelectedFaculty(e.target.value);
+            setCurrentPage(1);
+          }}
           className="border px-2 py-1 rounded w-full md:w-1/4"
         >
           <option value="">All Faculties</option>
           {uniqueValues("faculty").map((fac) => (
-            <option key={fac} value={fac}>{fac}</option>
+            <option key={fac} value={fac}>
+              {fac}
+            </option>
           ))}
         </select>
       </div>
 
       {/* Export Button */}
       <div className="flex justify-end mb-2">
-        <button onClick={exportToExcel} className="bg-black text-white py-1 px-4 rounded">
+        <button
+          onClick={exportToExcel}
+          className="bg-black text-white py-1 px-4 rounded"
+        >
           Download Excel
         </button>
       </div>
@@ -113,22 +140,50 @@ const Page = () => {
       <table className="min-w-full border-collapse">
         <thead>
           <tr className="text-xs md:text-2xl">
-            {["S No.", "Name", "Email", "Phone", "Batch", "Faculty", "Profile"].map((h, i) => (
-              <th key={i} className="border px-2 py-1">{h}</th>
+            {[
+              "S No.",
+              "Name",
+              "Email",
+              "Phone",
+              "Batch",
+              "Faculty",
+              "Profile",
+              "Action",
+            ].map((h, i) => (
+              <th key={i} className="border px-2 py-1">
+                {h}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {currentUsers.map((user, i) => (
-            <tr key={user.id} className="text-center text-xs md:text-xl font-mono italic">
-              <td className="border px-2 py-1">{(currentPage - 1) * usersPerPage + i + 1}</td>
+            <tr
+              key={user.id}
+              className="text-center text-xs md:text-xl font-mono italic"
+            >
+              <td className="border px-2 py-1">
+                {(currentPage - 1) * usersPerPage + i + 1}
+              </td>
               <td className="border px-2 py-1">{user.fullName}</td>
               <td className="border px-2 py-1">{user.email}</td>
               <td className="border px-2 py-1">{user.mobileNumber || "----"}</td>
               <td className="border px-2 py-1">{user.batch || "----"}</td>
               <td className="border px-2 py-1">{user.faculty || "----"}</td>
               <td className="border px-2 py-1 w-32">
-                <img src={user.imgurl || defaultImg} alt="" className="w-24 h-24 object-cover rounded-xl" />
+                <img
+                  src={user.imgurl || defaultImg}
+                  alt=""
+                  className="h-10 w-auto md:w-24 md:h-24 object-cover rounded-2xl"
+                />
+              </td>
+              <td className="border px-2 py-1">
+                <button
+                  onClick={() => router.push(`/dashboard/users/edit/${user.id}`)}
+                  className="bg-black text-white px-2 py-1 rounded"
+                >
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
@@ -137,19 +192,31 @@ const Page = () => {
 
       {/* Pagination */}
       <div className="flex justify-center mt-4 space-x-2">
-        <button onClick={() => setCurrentPage(p => p - 1)} disabled={currentPage === 1} className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50">
+        <button
+          onClick={() => setCurrentPage((p) => p - 1)}
+          disabled={currentPage === 1}
+          className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
+        >
           Prev
         </button>
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}
             onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-black text-white" : "bg-gray-200 hover:bg-gray-300"}`}
+            className={`px-3 py-1 rounded ${
+              currentPage === i + 1
+                ? "bg-black text-white"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
           >
             {i + 1}
           </button>
         ))}
-        <button onClick={() => setCurrentPage(p => p + 1)} disabled={currentPage === totalPages} className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50">
+        <button
+          onClick={() => setCurrentPage((p) => p + 1)}
+          disabled={currentPage === totalPages}
+          className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
+        >
           Next
         </button>
       </div>
