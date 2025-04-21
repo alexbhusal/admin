@@ -14,10 +14,6 @@ export function middleware(req) {
 
 export const config = {
   matcher: [
-    // '/dashboard/:path*',
-    // '/dashboard/addface',
-    // '/dashboard/attendance',
-    // '/dashboard/users',
-
+    '/dashboard/:path*',
   ],
 };
