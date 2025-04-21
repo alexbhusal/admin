@@ -13,7 +13,7 @@ const Page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5;
 
-  const defaultImg = "https://imgs.search.brave.com/..."; // Truncated for brevity
+  const defaultImg = "https://res.cloudinary.com/dxdbrqanq/image/upload/v1745248025/cmwzp0fvevkvc4ypxmpc.png";
 
   useEffect(() => {
     const fetchData = async () => {
