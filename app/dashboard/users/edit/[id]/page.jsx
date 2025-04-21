@@ -5,6 +5,7 @@ import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "../../../../../util/fire";
 import Swal from "sweetalert2";
 import Loading from "@/Components/Loading";
+import EditLoad from "@/Components/EditUI";
 
 const EditUserPage = () => {
   const { id } = useParams();
@@ -62,7 +63,7 @@ const EditUserPage = () => {
     }
   };
 
-  if (loading) return <div className="flex justify-center items-center h-screen"><Loading /></div>;
+  if (loading) return <div className="flex justify-center items-center h-screen"><EditLoad/></div>;
   if (!user) return <div className="flex justify-center items-center h-screen">User Not Found</div>;
 
   return (
