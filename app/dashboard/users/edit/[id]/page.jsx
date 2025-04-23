@@ -4,7 +4,6 @@ import { useParams, useRouter } from "next/navigation";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "../../../../../util/fire";
 import Swal from "sweetalert2";
-import Loading from "@/Components/Loading";
 import EditLoad from "@/Components/EditUI";
 
 const EditUserPage = () => {
@@ -13,6 +12,10 @@ const EditUserPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+
+  const defaultImg =
+    "https://res.cloudinary.com/dxdbrqanq/image/upload/v1745248025/cmwzp0fvevkvc4ypxmpc.png";
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -68,17 +71,20 @@ const EditUserPage = () => {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Edit User</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center ">Edit User</h1>
+      <div className="flex justify-center items-center">
+      <img src={user.imgurl || defaultImg} alt=""  className="h-32 w-32 object-cover rounded-2xl"/>
+    </div>
       {["fullName", "email", "mobileNumber", "batch", "faculty"].map((field) => (
         <div key={field} className="mb-4">
-          <label className="block mb-1">{field}</label>
+          <label className="block mb-1 font-serif">{field.toUpperCase()}</label>
           <input
             type="text"
             name={field}
             value={user[field] || ""}
             placeholder={`${field} not available`}
             onChange={handleChange}
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded font"
           />
         </div>
       ))}
