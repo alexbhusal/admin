@@ -31,11 +31,11 @@ const Page = () => {
       {user ? (
         <>
           <div>
-            <h1 className="text-center text-4xl font-serif italic">
+            <h1 className="text-center text-4xl font-serif italic m-2">
               Admin Dashboard
             </h1>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-200 rounded-3xl">
             <AdminCard />
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center mt-10">
