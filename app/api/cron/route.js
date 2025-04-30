@@ -14,7 +14,7 @@ export async function GET() {
     from: '"FaceTrack" <abcd@gmail.com>',
     to: "bhvnbhsl@gmail.com",
     subject: "Test Email",
-    text: "This is a test email sent every 2 minutes!",
+    text: "This is a test email",
   };
 
   try {

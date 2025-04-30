@@ -39,7 +39,7 @@ const Page = () => {
 
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
-      users.map((user, i) => ({
+      filteredUsers.map((user, i) => ({
         "S No.": i + 1,
         Name: user.fullName,
         Email: user.email,
