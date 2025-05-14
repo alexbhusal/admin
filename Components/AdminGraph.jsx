@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 
-export default function CustomGauge() {
+export default function CustomGauge({ totalStudents ,presentCount}) {
   return (
     <Gauge
-      value={5} 
-      valueMax={7} 
+      value={presentCount} 
+      valueMax={totalStudents} 
       startAngle={-110}
       endAngle={110}
       sx={{

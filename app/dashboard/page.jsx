@@ -1,20 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
-import { auth } from "../../util/fire";
+import { auth, firestore } from "../../util/fire";
 import { onAuthStateChanged } from "firebase/auth";
-import Loading from "../../Components/Loading";
+import { collection, getDocs } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
+
+import Loading from "../../Components/Loading";
 import AdminCard from "@/Components/AdminCard";
 import BasicPie from "@/Components/AdminPieChart";
 import CustomGauge from "@/Components/AdminGraph";
-import { firestore } from "../../util/fire"; 
-import { collection, getDocs } from "firebase/firestore";
 
 const Page = () => {
   const [user, setUser] = useState(null);
   const [studentData, setStudentData] = useState(null);
+  const [presentCount, setPresentCount] = useState(0);
+  const selectedDate = new Date().toISOString().split("T")[0]; // Today's date
 
-  // Fetch student data from Firestore
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
@@ -25,7 +28,6 @@ const Page = () => {
       }
     });
 
-    // Fetch student data when the component mounts
     const fetchStudentData = async () => {
       const userDB = collection(firestore, "users");
       const snapshot = await getDocs(userDB);
@@ -39,16 +41,32 @@ const Page = () => {
       };
 
       students.forEach(student => {
-        const department = student.faculty ; 
+        const department = student.faculty;
         if (departmentCounts[department] !== undefined) {
           departmentCounts[department]++;
+        } else {
+          departmentCounts.Other++;
         }
       });
 
       setStudentData(departmentCounts);
     };
 
+    const fetchAttendanceData = async () => {
+      try {
+        const attData = collection(firestore, `attendance/${selectedDate}/records`);
+        const snapshot = await getDocs(attData);
+        const records = snapshot.docs.map(doc => doc.data());
+
+        const present = records.filter(record => record.status === "present").length;
+        setPresentCount(present);
+      } catch (error) {
+        console.error("Error fetching today's attendance:", error);
+      }
+    };
+
     fetchStudentData();
+    fetchAttendanceData();
 
     return () => unsubscribe();
   }, []);
@@ -72,7 +90,7 @@ const Page = () => {
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center mt-10">
             <div className="w-1/2 flex flex-col items-center">
-              <CustomGauge />
+              <CustomGauge totalStudents={totalStudents} presentCount={presentCount} />
               <h1 className="text-center text-4xl font-serif italic">Today's Attendance</h1>
             </div>
             <div className="w-1/2 flex flex-col items-center">
